@@ -18,10 +18,6 @@ module.exports = {
         },
       },
       {
-        test: /\.hbs$/,
-        loader: "handlebars-loader",
-      },
-      {
         test: /\.ts$/, // .ts 에 한하여 ts-loader를 이용하여 transpiling
         exclude: /node_module/,
         use: {

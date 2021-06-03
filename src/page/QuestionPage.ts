@@ -78,8 +78,6 @@ export class QuestionPage implements BaseClass {
   }
 
   private setCurrentQuestion() {
-    console.log("Set CurrentAns");
-    console.log(answerSeet.currentIndex);
     this.headerInfo.second = answerSeet.seet[answerSeet.currentIndex].second;
     this.contentInfo.question = answerSeet.seet[answerSeet.currentIndex].text;
     this.contentInfo.currentStr = "";
@@ -87,9 +85,12 @@ export class QuestionPage implements BaseClass {
 
   private nextQuestion() {
     answerSeet.currentIndex++;
-    if (answerSeet.currentIndex === answerSeet.seet.length) {
+    if (answerSeet.currentIndex >= answerSeet.seet.length) {
       // go Route
       this.timer && clearInterval(this.timer);
+      window.location.hash = "#/result";
+      eventQueue.slice(0, eventQueue.length);
+      console.log(`Go Router` + eventQueue.length);
       return;
     }
     this.setCurrentQuestion();
@@ -112,6 +113,7 @@ export class QuestionPage implements BaseClass {
           currentSeet.duration++;
           if (currentSeet.duration === currentSeet.second) {
             this.nextQuestion();
+            this.childUpdate();
           } else {
             this.headerInfo.second = currentSeet.second - currentSeet.duration;
             eventQueue.push({ fn: this.headRender, data: this.headerInfo });

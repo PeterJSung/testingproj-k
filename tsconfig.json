@@ -5,6 +5,6 @@
     "esModuleInterop": true, // commonJS 모듈을 ES6로 import
     "sourceMap": true // 디버깅 맵
   },
-  "include": ["src/*", "src/page/route.ts", "src/page/QuestionPage.ts"],
+  "include": ["src/*"],
   "exclude": ["node_modules"]
 }
