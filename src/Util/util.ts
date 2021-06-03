@@ -34,14 +34,29 @@ const writeToSeet = (
   userSeet.seet[userSeet.currentIndex].duration = duration;
 };
 
-const getScore = (userSeet: UserAnswerSeet): number => {
-  let ret = 0;
+const getResultInfo = (userSeet: UserAnswerSeet): [number, number] => {
+  let correctCount: number = 0;
+  let avgTime: number = 0;
   userSeet.seet.forEach((data) => {
     if (data.answer === data.text) {
-      ret++;
+      correctCount++;
+      avgTime += data.second - data.duration;
     }
   });
-  return ret;
+  return [
+    correctCount,
+    correctCount > 0 ? Math.floor(avgTime / correctCount) : 0,
+  ];
+};
+
+const getScore = (userSeet: UserAnswerSeet): number => {
+  let correctCount: number = 0;
+  userSeet.seet.forEach((data) => {
+    if (data.answer === data.text) {
+      correctCount++;
+    }
+  });
+  return correctCount;
 };
 
 const goRoute = async (next: string) => {
@@ -57,4 +72,11 @@ const goRoute = async (next: string) => {
   });
 };
 
-export { extractData, generateNewSeet, writeToSeet, getScore, goRoute };
+export {
+  extractData,
+  generateNewSeet,
+  writeToSeet,
+  getScore,
+  getResultInfo,
+  goRoute,
+};

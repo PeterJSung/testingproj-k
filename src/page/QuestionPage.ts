@@ -2,7 +2,13 @@ import { BaseClass } from "./Common";
 import { answerSeet, QuestionDataSet } from "../store/QuestionStore";
 import { eventQueue } from "../store/EventStore";
 import { get } from "../Util/http";
-import { generateNewSeet, writeToSeet, getScore, goRoute } from "../Util/util";
+import {
+  generateNewSeet,
+  writeToSeet,
+  getResultInfo,
+  goRoute,
+  getScore,
+} from "../Util/util";
 import QuestionHeader, {
   QuestionHeaderInfo,
   initialValue as HeadInitial,

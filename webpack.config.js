@@ -3,7 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.ts", // 번들링 시작 위치
+  entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "bundle.js",
@@ -11,18 +11,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /[\.js]$/, // .js 에 한하여 babel-loader를 이용하여 transpiling
+        test: /[\.js]$/,
         exclude: /node_module/,
-        use: {
-          loader: "babel-loader",
-        },
+        use: ["babel-loader"],
       },
       {
-        test: /\.ts$/, // .ts 에 한하여 ts-loader를 이용하여 transpiling
+        test: /\.ts$/,
         exclude: /node_module/,
-        use: {
-          loader: "ts-loader",
-        },
+        use: ["ts-loader"],
       },
       {
         test: /\.css$/,
@@ -43,5 +39,5 @@ module.exports = {
     host: "localhost", // live-server host 및 port
     port: 6275,
   },
-  mode: "development", // 번들링 모드 development / production
+  mode: "production", // 번들링 모드 development / production
 };
