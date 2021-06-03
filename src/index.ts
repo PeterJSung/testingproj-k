@@ -6,7 +6,7 @@ import Loading from "./component/Loading";
 import { eventQueue } from "./store/EventStore";
 import { BaseClass } from "./page/Common";
 
-import { goRoute } from "./Util/util";
+import { goRoute } from "./util/util";
 const a = 1;
 const hashDiv = document.getElementById("hash-app");
 let currentPage: BaseClass;

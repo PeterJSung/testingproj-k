@@ -1,6 +1,6 @@
 import { BaseClass } from "./Common";
 import { answerSeet } from "../store/QuestionStore";
-import { getResultInfo, goRoute } from "../Util/util";
+import { getResultInfo, goRoute } from "../util/util";
 import ResultScore from "../component/ResultScore";
 import ResultTime from "../component/ResultTime";
 

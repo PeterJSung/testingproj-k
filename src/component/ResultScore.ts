@@ -1,4 +1,4 @@
-import { extractData } from "../Util/util";
+import { extractData } from "../util/util";
 
 export interface ResultScoreInfo {
   score: number;

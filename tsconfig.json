@@ -3,6 +3,7 @@
     "module": "ES6",
     "moduleResolution": "Node",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "sourceMap": true
   },
   "include": ["src/**/*"],
