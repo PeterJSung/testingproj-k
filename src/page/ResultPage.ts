@@ -1,6 +1,6 @@
 import { BaseClass } from "./Common";
 import { answerSeet } from "../store/QuestionStore";
-import { getScore } from "../Util/util";
+import { getScore, goRoute } from "../Util/util";
 import ResultScore from "../component/ResultScore";
 
 export class ResultPage implements BaseClass {
@@ -16,7 +16,12 @@ export class ResultPage implements BaseClass {
     return view;
   }
 
-  async attachEvent() {}
+  async attachEvent() {
+    const button = document.getElementById("retrybtn");
+    button.addEventListener("click", () => {
+      goRoute("#/");
+    });
+  }
 }
 
 export default ResultPage;

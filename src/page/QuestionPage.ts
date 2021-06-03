@@ -2,7 +2,7 @@ import { BaseClass } from "./Common";
 import { answerSeet, QuestionDataSet } from "../store/QuestionStore";
 import { eventQueue } from "../store/EventStore";
 import { get } from "../Util/http";
-import { generateNewSeet, writeToSeet, getScore } from "../Util/util";
+import { generateNewSeet, writeToSeet, getScore, goRoute } from "../Util/util";
 import QuestionHeader, {
   QuestionHeaderInfo,
   initialValue as HeadInitial,
@@ -88,9 +88,7 @@ export class QuestionPage implements BaseClass {
     if (answerSeet.currentIndex >= answerSeet.seet.length) {
       // go Route
       this.timer && clearInterval(this.timer);
-      window.location.hash = "#/result";
-      eventQueue.slice(0, eventQueue.length);
-      console.log(`Go Router` + eventQueue.length);
+      goRoute("#/result");
       return;
     }
     this.setCurrentQuestion();

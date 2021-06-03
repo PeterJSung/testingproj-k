@@ -1,3 +1,4 @@
+import { eventQueue } from "../store/EventStore";
 import {
   QuestionDataSet,
   SeetDataSet,
@@ -43,4 +44,17 @@ const getScore = (userSeet: UserAnswerSeet): number => {
   return ret;
 };
 
-export { extractData, generateNewSeet, writeToSeet, getScore };
+const goRoute = async (next: string) => {
+  eventQueue.push({
+    fn: async () => {
+      // page 가 전환되면 전부다 이벤트 강제로 전부다 클리어해주고 다음해쉬로 전환함
+      while (eventQueue.length > 0) {
+        eventQueue.shift();
+      }
+      window.location.hash = next;
+    },
+    data: {},
+  });
+};
+
+export { extractData, generateNewSeet, writeToSeet, getScore, goRoute };
