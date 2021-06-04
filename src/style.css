@@ -25,6 +25,16 @@ body {
   animation: spin 0.5s linear infinite;
 }
 
+.hash-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#question-header {
+  display: flex;
+  width: 100%;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
