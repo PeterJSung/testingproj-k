@@ -11,7 +11,6 @@ body {
 }
 
 #hash-app {
-  border: red 2px solid;
   width: 40%;
   height: 30%;
 }
@@ -30,9 +29,15 @@ body {
   flex-direction: column;
 }
 
-#question-header {
-  display: flex;
-  width: 100%;
+.action-button {
+  margin-top: 1rem;
+  width: 30%;
+  background-color: #46a1f8;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 1rem;
 }
 
 @keyframes spin {

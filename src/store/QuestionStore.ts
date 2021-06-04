@@ -3,9 +3,9 @@ export interface QuestionDataSet {
   text: string;
 }
 
-export type SeetDataSet = QuestionDataSet & {
-  answer: string;
-  duration: number;
+export type SeetDataSet = {
+  isCorrect: boolean;
+  solveTime: number;
 };
 
 export interface UserAnswerSeet {
@@ -18,4 +18,8 @@ const answerSeet: UserAnswerSeet = {
   seet: [],
 };
 
-export { answerSeet };
+const questionSeet: { data: QuestionDataSet[] } = {
+  data: [],
+};
+
+export { answerSeet, questionSeet };

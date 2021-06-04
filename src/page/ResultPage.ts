@@ -4,6 +4,8 @@ import { getResultInfo, goRoute } from "../util/util";
 import ResultScore from "../component/ResultScore";
 import ResultTime from "../component/ResultTime";
 
+import "./result.css";
+
 export class ResultPage implements BaseClass {
   async beforeRender() {}
 
@@ -11,10 +13,10 @@ export class ResultPage implements BaseClass {
     console.log(answerSeet);
     const [correctCount, avgTime] = getResultInfo(answerSeet.seet);
     const view = /*html*/ `
-    <div>Mission Complete</div>
-    <div id="score-amount-body">${ResultScore({ score: correctCount })}</div>
-    <div id="score-time-body">${ResultTime({ time: avgTime })}</div>
-    <button id="retrybtn">다시시작</button>
+    <span class="complete-comment">Mission Complete</span>
+    ${ResultScore({ score: correctCount })}
+    ${ResultTime({ time: avgTime })}
+    <button id="retrybtn" class="action-button">다시시작</button>
     `;
     return view;
   }

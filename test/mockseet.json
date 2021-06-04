@@ -1,74 +1,50 @@
 [
   {
-    "answer": "",
-    "duration": 0,
-    "second": 10,
-    "text": "hello"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 10,
-    "text": "world"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 8,
-    "text": "this"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 3,
-    "text": "is"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 15,
-    "text": "kakaopay"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 5,
-    "text": "we"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 5,
-    "text": "are"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 15,
-    "text": "kakaopay"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 15,
-    "text": "frontend"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 20,
-    "text": "developers"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 15,
-    "text": "join"
+    "isCorrect": true,
+    "solveTime": 0
   },
   {
-    "answer": "",
-    "duration": 0,
-    "second": 10,
-    "text": "us"
+    "isCorrect": true,
+    "solveTime": 0
   }
 ]

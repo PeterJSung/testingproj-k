@@ -1,0 +1,39 @@
+#question-header {
+  display: flex;
+  width: 100%;
+}
+
+#question_body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head-common {
+  display: flex;
+  flex-grow: 1;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.head-common > span {
+  font-size: 1.5rem;
+}
+
+.question-string {
+  text-align: center;
+  min-height: 3rem;
+  font-size: 3rem;
+}
+
+#inputbox {
+  width: 60%;
+  height: 1rem;
+}

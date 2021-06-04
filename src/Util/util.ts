@@ -1,9 +1,5 @@
 import { eventQueue } from "../store/EventStore";
-import {
-  QuestionDataSet,
-  SeetDataSet,
-  UserAnswerSeet,
-} from "../store/QuestionStore";
+import { SeetDataSet } from "../store/QuestionStore";
 
 const extractData = <T>(object: Object, key: string, defaultValue: T): T => {
   if (object && object[key] !== undefined) {
@@ -13,34 +9,21 @@ const extractData = <T>(object: Object, key: string, defaultValue: T): T => {
   }
 };
 
-const generateNewSeet = (questions: QuestionDataSet[]): SeetDataSet[] => {
-  return questions.map((eachData) => ({
-    answer: "",
-    duration: 0,
-    text: eachData.text,
-    second: eachData.second,
-  }));
-};
-
-const writeToSeet = (
-  userSeet: UserAnswerSeet,
-  duration: number,
-  answer: string
-) => {
-  if (userSeet.currentIndex >= userSeet.seet.length) {
-    return;
+const generateNewSeet = (count: number): SeetDataSet[] => {
+  const ret: SeetDataSet[] = [];
+  for (let i = 0; i < count; i++) {
+    ret.push({ isCorrect: true, solveTime: 0 });
   }
-  userSeet.seet[userSeet.currentIndex].answer = answer;
-  userSeet.seet[userSeet.currentIndex].duration = duration;
+  return ret;
 };
 
 const getResultInfo = (userSeet: SeetDataSet[]): [number, number] => {
   let correctCount: number = 0;
   let avgTime: number = 0;
   userSeet.forEach((data) => {
-    if (data.answer === data.text) {
+    if (data.isCorrect) {
       correctCount++;
-      avgTime += data.second - data.duration;
+      avgTime += data.solveTime;
     }
   });
   return [
@@ -50,13 +33,13 @@ const getResultInfo = (userSeet: SeetDataSet[]): [number, number] => {
 };
 
 const getScore = (userSeet: SeetDataSet[]): number => {
-  let correctCount: number = 0;
+  let inCorrectCount: number = 0;
   userSeet.forEach((data) => {
-    if (data.answer === data.text) {
-      correctCount++;
+    if (!data.isCorrect) {
+      inCorrectCount++;
     }
   });
-  return correctCount;
+  return userSeet.length - inCorrectCount;
 };
 
 const goRoute = async (next: string) => {
@@ -72,11 +55,4 @@ const goRoute = async (next: string) => {
   });
 };
 
-export {
-  extractData,
-  generateNewSeet,
-  writeToSeet,
-  getScore,
-  getResultInfo,
-  goRoute,
-};
+export { extractData, generateNewSeet, getScore, getResultInfo, goRoute };

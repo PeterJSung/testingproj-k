@@ -11,7 +11,7 @@ export const initialValue: ResultScoreInfo = {
 const ResultScore = (data: ResultScoreInfo) => {
   const score: number = extractData<number>(data, "score", 0);
   return `
-      <div>당신의 점수는 ${score} 입니다</div>
+      <span class="score-comment">당신의 점수는 ${score} 입니다</span>
   `;
 };
 

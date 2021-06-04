@@ -1,14 +1,8 @@
 import { BaseClass } from "./Common";
-import { answerSeet, QuestionDataSet } from "../store/QuestionStore";
+import { answerSeet, questionSeet } from "../store/QuestionStore";
 import { eventQueue } from "../store/EventStore";
 import { get } from "../util/http";
-import {
-  generateNewSeet,
-  writeToSeet,
-  getResultInfo,
-  goRoute,
-  getScore,
-} from "../util/util";
+import { generateNewSeet, goRoute, getScore } from "../util/util";
 import QuestionHeader, {
   QuestionHeaderInfo,
   initialValue as HeadInitial,
@@ -17,6 +11,7 @@ import QuestionContents, {
   QuestionContentInfo,
   initialValue as ContentInitial,
 } from "../component/QuestionContents";
+import "./question.css";
 
 type KEY_UP_EVENT = KeyboardEvent & { target: HTMLInputElement };
 
@@ -24,7 +19,6 @@ export class QuestionPage implements BaseClass {
   headerInfo: QuestionHeaderInfo = HeadInitial;
   contentInfo: QuestionContentInfo = ContentInitial;
   timer: NodeJS.Timeout = undefined;
-  questions: QuestionDataSet[] = [];
 
   headRender = async (data: QuestionHeaderInfo) => {
     const headerDiv = document.getElementById("question-header");
@@ -54,7 +48,7 @@ export class QuestionPage implements BaseClass {
   }
 
   async beforeRender() {
-    this.questions = await get(
+    questionSeet.data = await get(
       "https://my-json-server.typicode.com/kakaopay-fe/resources/words"
     );
     this.resetInfo();
@@ -84,8 +78,9 @@ export class QuestionPage implements BaseClass {
   }
 
   private setCurrentQuestion() {
-    this.headerInfo.second = answerSeet.seet[answerSeet.currentIndex].second;
-    this.contentInfo.question = answerSeet.seet[answerSeet.currentIndex].text;
+    this.headerInfo.score = getScore(answerSeet.seet);
+    this.headerInfo.second = questionSeet.data[answerSeet.currentIndex].second;
+    this.contentInfo.question = questionSeet.data[answerSeet.currentIndex].text;
     this.contentInfo.currentStr = "";
   }
 
@@ -101,7 +96,7 @@ export class QuestionPage implements BaseClass {
   }
 
   async attachEvent() {
-    const button = document.getElementById("actionbtn");
+    const button = document.getElementById("playbtn");
     const input = document.getElementById("inputbox") as HTMLInputElement;
 
     input.disabled = !this.contentInfo.isPlay;
@@ -110,16 +105,19 @@ export class QuestionPage implements BaseClass {
         this.resetInfo();
       } else {
         this.contentInfo.isPlay = true;
-        answerSeet.seet = generateNewSeet(this.questions);
+        answerSeet.seet = generateNewSeet(questionSeet.data.length);
+        this.headerInfo.score = answerSeet.seet.length;
         this.setCurrentQuestion();
         this.timer = setInterval(() => {
-          const currentSeet = answerSeet.seet[answerSeet.currentIndex];
-          currentSeet.duration++;
-          if (currentSeet.duration === currentSeet.second) {
+          const givenTime = questionSeet.data[answerSeet.currentIndex].second;
+          const currentAnswer = answerSeet.seet[answerSeet.currentIndex];
+          currentAnswer.solveTime++;
+          if (currentAnswer.solveTime === givenTime) {
+            currentAnswer.isCorrect = false;
             this.nextQuestion();
             this.childUpdate();
           } else {
-            this.headerInfo.second = currentSeet.second - currentSeet.duration;
+            this.headerInfo.second = givenTime - currentAnswer.solveTime;
             eventQueue.push({ fn: this.headRender, data: this.headerInfo });
           }
         }, 1000);
@@ -128,13 +126,14 @@ export class QuestionPage implements BaseClass {
     });
     input.addEventListener("keyup", (event: KEY_UP_EVENT) => {
       if (event.key === "Enter") {
-        writeToSeet(
-          answerSeet,
-          this.headerInfo.second,
-          this.contentInfo.currentStr
-        );
-        this.headerInfo.score = getScore(answerSeet.seet);
-        this.nextQuestion();
+        const isAnswer =
+          this.contentInfo.currentStr ===
+          questionSeet.data[answerSeet.currentIndex].text;
+        if (isAnswer) {
+          this.nextQuestion();
+        } else {
+          this.contentInfo.currentStr = "";
+        }
         this.childUpdate();
       } else {
         this.contentInfo.currentStr = event.target.value;

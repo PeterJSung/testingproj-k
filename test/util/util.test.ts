@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import * as _ from "lodash";
 
 import {
   extractData,
@@ -7,7 +7,6 @@ import {
   getScore,
 } from "../../src/util/util";
 
-import API_JSON from "../apires.json";
 import MOCK_SHEET from "../mockseet.json";
 
 describe("test util", () => {
@@ -21,30 +20,31 @@ describe("test util", () => {
   });
 
   it("generateNewSeet", () => {
-    expect(generateNewSeet(API_JSON)).toStrictEqual(MOCK_SHEET);
+    expect(generateNewSeet(12)).toStrictEqual(MOCK_SHEET);
   });
 
   it("getResultInfo", () => {
-    const dummySeet = _.cloneDeep(MOCK_SHEET)
-    dummySeet[0].answer = dummySeet[0].text
-    dummySeet[0].duration = dummySeet[0].second - 1
+    const dummySeet = _.cloneDeep(MOCK_SHEET);
+    dummySeet[0].isCorrect = true;
+    dummySeet[0].solveTime = 2;
 
-    dummySeet[1].answer = dummySeet[1].text
-    dummySeet[1].duration = dummySeet[1].second - 1
+    dummySeet[1].isCorrect = true;
+    dummySeet[1].solveTime = 4;
+    for (let i = 2; i < dummySeet.length; i++) {
+      dummySeet[i].isCorrect = false;
+    }
 
-    //2문제 맞고 평균시간 1초나와야함
+    //2문제 맞고 평균시간 3초나와야함 2번문제부터 다틀린거임
 
-    expect(getResultInfo(dummySeet)).toEqual([2,1]);
+    expect(getResultInfo(dummySeet)).toEqual([2, 3]);
   });
 
   it("getScore", () => {
-    const dummySeet = _.cloneDeep(MOCK_SHEET)
-    dummySeet[0].answer = dummySeet[0].text
-    dummySeet[1].answer = dummySeet[1].text
-    dummySeet[2].answer = dummySeet[2].text
+    const dummySeet = _.cloneDeep(MOCK_SHEET);
+    dummySeet[1].isCorrect = false;
+    dummySeet[2].isCorrect = false;
 
     //3문제 맞아야함
-
-    expect(getScore(dummySeet)).toEqual(3);
+    expect(getScore(dummySeet)).toEqual(MOCK_SHEET.length - 2);
   });
 });

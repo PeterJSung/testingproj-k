@@ -14,10 +14,10 @@ const QuestionHeader = (data: QuestionHeaderInfo) => {
   const second = extractData<number>(data, "second", 0);
   const score: number = extractData<number>(data, "score", 0);
   return `
-      <div>
+      <div class="head-common flex-start">
         <span>남은시간: </span><span id="timer-value">${second}</span>
       </div>
-      <div>
+      <div class="head-common flex-end">
         <span>점수: </span><span id="score-value">${score}</span>
       </div>
   `;
