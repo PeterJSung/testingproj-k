@@ -133,7 +133,7 @@ export class QuestionPage implements BaseClass {
           this.headerInfo.second,
           this.contentInfo.currentStr
         );
-        this.headerInfo.score = getScore(answerSeet);
+        this.headerInfo.score = getScore(answerSeet.seet);
         this.nextQuestion();
         this.childUpdate();
       } else {

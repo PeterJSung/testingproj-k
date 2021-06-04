@@ -34,10 +34,10 @@ const writeToSeet = (
   userSeet.seet[userSeet.currentIndex].duration = duration;
 };
 
-const getResultInfo = (userSeet: UserAnswerSeet): [number, number] => {
+const getResultInfo = (userSeet: SeetDataSet[]): [number, number] => {
   let correctCount: number = 0;
   let avgTime: number = 0;
-  userSeet.seet.forEach((data) => {
+  userSeet.forEach((data) => {
     if (data.answer === data.text) {
       correctCount++;
       avgTime += data.second - data.duration;
@@ -49,9 +49,9 @@ const getResultInfo = (userSeet: UserAnswerSeet): [number, number] => {
   ];
 };
 
-const getScore = (userSeet: UserAnswerSeet): number => {
+const getScore = (userSeet: SeetDataSet[]): number => {
   let correctCount: number = 0;
-  userSeet.seet.forEach((data) => {
+  userSeet.forEach((data) => {
     if (data.answer === data.text) {
       correctCount++;
     }

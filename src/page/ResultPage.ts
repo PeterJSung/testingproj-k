@@ -9,7 +9,7 @@ export class ResultPage implements BaseClass {
 
   async render() {
     console.log(answerSeet);
-    const [correctCount, avgTime] = getResultInfo(answerSeet);
+    const [correctCount, avgTime] = getResultInfo(answerSeet.seet);
     const view = /*html*/ `
     <div>Mission Complete</div>
     <div id="score-amount-body">${ResultScore({ score: correctCount })}</div>
